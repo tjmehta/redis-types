@@ -199,10 +199,10 @@ fooSet.sadd("1", function (err) {
 * Lowercase works too
 
 ```js
-var RedisSet = require('redis-types').RedisSet;
-var fooSet = new RedisSet('foo');
-fooSet.zadd("1", function (err) {
-  fooSet.zrange(0, -1, function (err, items) {
+var RedisSortedSet = require('redis-types').RedisSortedSet;
+var fooSortedSet = new RedisSortedSet('foo');
+fooSortedSet.zadd("1", function (err) {
+  fooSortedSet.zrange(0, -1, function (err, items) {
     console.log(items); // ["1"]
   });
 });
