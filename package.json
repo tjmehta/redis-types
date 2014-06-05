@@ -1,6 +1,6 @@
 {
   "name": "redis-types",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Redis type classes: lists, hashes, sets, ...",
   "main": "index.js",
   "scripts": {
