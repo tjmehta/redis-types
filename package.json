@@ -4,8 +4,8 @@
   "description": "Redis type classes: lists, hashes, sets, ...",
   "main": "index.js",
   "scripts": {
-    "test": "lab -c",
-    "test-watch": "nodemon --exec lab -c test"
+    "test": "lab",
+    "test-watch": "nodemon --exec npm test"
   },
   "repository": {
     "type": "git",

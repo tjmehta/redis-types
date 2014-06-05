@@ -5,6 +5,7 @@ var it = Lab.test;
 var expect = Lab.expect;
 var before = Lab.before;
 var after = Lab.after;
+var redisTypes = require('../index');
 var RedisKey = require('../lib/Key');
 var createCount = require('callback-count');
 
