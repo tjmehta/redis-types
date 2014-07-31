@@ -32,10 +32,10 @@
   "devDependencies": {
     "lab": "~3.0.1",
     "nodemon": "~1.0.17",
-    "callback-count": "~0.1.0"
-  },
-  "dependencies": {
+    "callback-count": "~0.1.0",
     "redis": "~0.10.1",
     "hiredis": "~0.1.16"
+  },
+  "dependencies": {
   }
 }
