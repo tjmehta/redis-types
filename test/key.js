@@ -11,6 +11,20 @@ var redisTypes = require('../index')({
 var RedisKey = redisTypes.Key;
 var createCount = require('callback-count');
 
+describe('instanciating the model', function () {
+  it('should throw an error if no redis client is provided', function (done) {
+    var errorCaught = false;
+    try {
+      var t = require('../index')();
+    } catch (err) {
+      errorCaught = true;
+      expect(err).to.be.okay;
+    }
+    expect(errorCaught).to.equal(true);
+    done()
+  });
+});
+
 describe('create RedisKey', function() {
   it('should require a key', function(done) {
     try {
