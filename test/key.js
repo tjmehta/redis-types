@@ -9,8 +9,21 @@ var redisTypes = require('../index')({
   redisClient: require('redis').createClient()
 });
 var RedisKey = redisTypes.Key;
-console.log(redisTypes);
 var createCount = require('callback-count');
+
+describe('instanciating the model', function () {
+  it('should throw an error if no redis client is provided', function (done) {
+    var errorCaught = false;
+    try {
+      var t = require('../index')();
+    } catch (err) {
+      errorCaught = true;
+      expect(err).to.be.okay;
+    }
+    expect(errorCaught).to.equal(true);
+    done()
+  });
+});
 
 describe('create RedisKey', function() {
   it('should require a key', function(done) {
@@ -429,6 +442,33 @@ describe('RedisKey RESTORE', function() {
       //   done();
       // });
       done();
+    });
+  });
+});
+
+describe('RedisKey SET', function() {
+  before(function (done) {
+    this.key = 'key';
+    this.redis = redis.createClient();
+    done();
+  });
+  after(function (done) {
+    this.redis.flushall(done);
+    delete this.key;
+    delete this.redis;
+  });
+  it('should create a redis key', function (done) {
+    var redis = this.redis;
+    var key = this.key;
+    var redisKey = new RedisKey(key);
+    var value = 'someAwesomeValue';
+    redisKey.set(value, function (err) {
+      expect(err).to.not.exist;
+      redis.get(key, function (err, setValue) {
+        expect(err).to.not.exist;
+        expect(setValue).to.equal(value);
+        done();
+      });
     });
   });
 });
