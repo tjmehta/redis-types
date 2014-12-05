@@ -169,6 +169,32 @@ describe('RedisKey EXPIREAT', function() {
   });
 });
 
+describe('RedisKey GET', function() {
+  before(function (done) {
+    this.key = 'key';
+    this.redis = redis.createClient();
+    done();
+  });
+  after(function (done) {
+    this.redis.flushall(done);
+    delete this.key;
+    delete this.redis;
+  });
+  it('should get a redis key', function (done) {
+    var key = this.key;
+    var redisKey = new RedisKey(key);
+    var value = 'someAwesomeValue';
+    redisKey.set(value, function (err) {
+      expect(err).to.not.exist;
+      redisKey.get(function (err, setValue) {
+        expect(err).to.not.exist;
+        expect(setValue).to.equal(value);
+        done();
+      });
+    });
+  });
+});
+
 // describe('RedisKey MOVE', function() {
 //   before(function (done) {
 //     this.key = 'key';
