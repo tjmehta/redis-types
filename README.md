@@ -16,6 +16,7 @@ Syntax is identical except that the redis-key is specified through the construct
 
 ### Key
 
+* SET
 * DEL
 * DUMP
 * EXISTS
