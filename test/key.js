@@ -9,7 +9,6 @@ var redisTypes = require('../index')({
   redisClient: require('redis').createClient()
 });
 var RedisKey = redisTypes.Key;
-console.log(redisTypes);
 var createCount = require('callback-count');
 
 describe('create RedisKey', function() {
@@ -429,6 +428,33 @@ describe('RedisKey RESTORE', function() {
       //   done();
       // });
       done();
+    });
+  });
+});
+
+describe('RedisKey SET', function() {
+  before(function (done) {
+    this.key = 'key';
+    this.redis = redis.createClient();
+    done();
+  });
+  after(function (done) {
+    this.redis.flushall(done);
+    delete this.key;
+    delete this.redis;
+  });
+  it('should create a redis key', function (done) {
+    var redis = this.redis;
+    var key = this.key;
+    var redisKey = new RedisKey(key);
+    var value = 'someAwesomeValue';
+    redisKey.set(value, function (err) {
+      expect(err).to.not.exist;
+      redis.get(key, function (err, setValue) {
+        expect(err).to.not.exist;
+        expect(setValue).to.equal(value);
+        done();
+      });
     });
   });
 });
